@@ -112,3 +112,47 @@ def inicializal_rendszer():
     return legitarsasag
 
 
+# Menü 
+def menu(legitarsasag):
+    while True:
+        print("\n==== LÉGIJÁRAT FOGLALÓ RENDSZER ====")
+        print("1. Járatok listázása")
+        print("2. Jegy foglalása")
+        print("3. Foglalás lemondása")
+        print("4. Foglalások listázása")
+        print("5. Kilépés")
+
+        valasz = input("Válassz műveletet (1-5): ")
+
+        if valasz == "1":
+            legitarsasag.listaz_jaratok()
+
+        elif valasz == "2":
+            felhasznalo = input("Felhasználónév: ")
+            legitarsasag.listaz_jaratok()
+            try:
+                jarat_index = int(input("Járat sorszáma: "))
+                datum = input("Dátum (ÉÉÉÉ-HH-NN): ")
+                legitarsasag.jegy_foglalasa(felhasznalo, jarat_index, datum)
+            except ValueError:
+                print("Hibás bevitel.")
+
+        elif valasz == "3":
+            foglalas_id = input("Add meg a lemondandó foglalás azonosítóját (ID eleje): ")
+            legitarsasag.lemond_foglalas(foglalas_id)
+
+        elif valasz == "4":
+            legitarsasag.listaz_foglalasok()
+
+        elif valasz == "5":
+            print("Viszlát!")
+            break
+
+        else:
+            print("Érvénytelen bevitel.")
+
+
+# Main 
+if __name__ == "__main__":
+    legitarsasag = inicializal_rendszer()
+    menu(legitarsasag)
